@@ -1,0 +1,46 @@
+<style>
+tr
+{border-left:1px solid black;
+border-top:1px solid black;}
+table
+{border-right:1px solid black;
+border-bottom:1px solid black;}
+</style>
+
+<h3>welcome to my_portfolio </h3>
+<h4> search Articles </h4>
+<%= form_tag serch_article_path,method: :get do %>
+<div>
+  <%= text_field_tag :article,params[:article],autofocus:true %>
+  <%= button_tag 'search' %>
+</div>
+<% end %>
+<br>
+</br>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th style="marggin-laft:30px"colspan="3">Actions</th>
+  </tr>
+  <tr>
+<% @article.each  do |article| %>
+ <td><strong style="padding-left:20px">Title: </strong><%= article.title %></td>
+
+
+ <td><strong  style="padding-left:20px">description: </strong><%= article.description.to_s.truncate(100) %></td>
+
+  <% if article.image.present? %>
+  <td> <%= image_tag(article.image.picture.url, size:"100x100")%></td>
+  <% end %>
+<td> <%= link_to 'Show', article %></td>
+<td><% if article.liked?(current_user) %>
+  <%= button_to "like", like_article_path(article.id),method:"put",disabled:true %>
+<% else  %>
+  <%= button_to "like",like_article_path(article.id),method: "post" %>
+<% end %></td>
+ <td><%= button_to "share",shared_article_path(article.id),method: "post" %></td>
+ <tr>
+<% end %>
+</table>

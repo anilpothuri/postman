@@ -1,0 +1,28 @@
+<strong> Title: </strong> <%= @article.title %>
+<strong> Description : </strong> <%= @article.description %>
+
+<% if @article.image.present? %>
+ <%= image_tag(@article.image.picture.url, size:"300x300")%>
+<% end %>
+
+  <% if @article.liked?(current_user) %>
+    <%= button_to "like", like_article_path(@article.id),method:"put",disabled:true %>
+  <% else  %>
+    <%= button_to "like",like_article_path(@article.id),method: "post" %>
+  <% end %>
+  <%= button_to "share",shared_article_path(@article.id),method: "post" %>
+
+<br></br>
+
+<br></br<center>
+
+<p><strong>liked users</strong></p>
+<% @likes.each do |user| %>
+  <%= user.email %><br></br>
+<% end %>
+
+<% if @shareds.present? %>
+  <strong>shared list</strong><br>
+  <%= @shareds.email %>
+  <% end %>
+  </center>

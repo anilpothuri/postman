@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Postman</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <% if user_signed_in? %>
+        <strong style="padding-left:20px"><%= current_user.role %></strong>
+        <u style="padding-left:20px"><%= link_to current_user.email+'_portfolio',my_portfolio_path %></u>
+        <u style="padding-left:20px"><%= link_to'log out',destroy_user_session_path, method: :delete %></u>
+          <% if current_user.role == "admin" %>
+           <u style="padding-left:20px"><%= link_to 'new article',new_article_path %></u>
+           <u style="padding-left:20px"><%= link_to 'new image',new_image_path %></u>
+          <% end %>
+          <u style="padding-left:20px"><%= link_to'liked articles list',likes_path %></u>
+          <u style="padding-left:20px"><%= link_to'articles list',articles_path %></u>
+          <br>
+      <% end %>
+      <br></br>
+    <center><%= yield %></center>
+  </body>
+</html>

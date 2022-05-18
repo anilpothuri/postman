@@ -1,0 +1,20 @@
+<% @articles.each do |article| %>
+<strong> Title : </strong> <%= article.title%><br>
+<strong> Description : </strong> <%= article.description %>
+
+<% if article.image.present? %>
+ <%= image_tag(article.image.picture.url, size:"100x100")%>
+<% end %>
+
+<br>
+<% if current_user.role=="admin" %>
+
+  <%= link_to 'Show', article %>
+  <%= link_to 'Edit', edit_article_path(article) %>
+  <%= button_to 'Destroy', article,method: :delete, data: { confirm: 'Are you sure?' } %>
+<% else %>
+<%= link_to 'Show', article %>
+<% end %>
+<br>
+
+<% end %>
