@@ -8,7 +8,6 @@
 
 <br>
 <% if current_user.role=="admin" %>
-
   <%= link_to 'Show', article %>
   <%= link_to 'Edit', edit_article_path(article) %>
   <%= button_to 'Destroy', article,method: :delete, data: { confirm: 'Are you sure?' } %>

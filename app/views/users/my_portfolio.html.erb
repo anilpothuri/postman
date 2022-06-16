@@ -17,6 +17,7 @@ border-bottom:1px solid black;}
 <% end %>
 <br>
 </br>
+
 <table>
   <tr>
     <th>Title</th>
@@ -29,7 +30,7 @@ border-bottom:1px solid black;}
  <td><strong style="padding-left:20px">Title: </strong><%= article.title %></td>
 
 
- <td><strong  style="padding-left:20px">description: </strong><%= article.description.to_s.truncate(100) %></td>
+ <td><strong  style="padding-left:20px">description: </strong><%= article.description.to_s.truncate(20) %></td>
 
   <% if article.image.present? %>
   <td> <%= image_tag(article.image.picture.url, size:"100x100")%></td>
@@ -44,3 +45,4 @@ border-bottom:1px solid black;}
  <tr>
 <% end %>
 </table>
+<%+ "it is working or not" %>
